@@ -9,6 +9,7 @@
 */
 
 //①セッションを開始する
+session_start();
 
 function getByid($id,$con){
 	/* 
@@ -35,9 +36,10 @@ if (/* ⑤の処理を書く */){
 }
 
 //⑧データベースへ接続し、接続情報を変数に保存する
-
+$sql = "SELECT * FROM books";
 //⑨データベースで使用する文字コードを「UTF8」にする
-
+mysql_set_charset('utf8');
+mysql_query('SET NAMES utf8', $sql);
 //⑩書籍数をカウントするための変数を宣言し、値を0で初期化する
 
 //⑪POSTの「books」から値を取得し、変数に設定する。
