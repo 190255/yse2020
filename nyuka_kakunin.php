@@ -9,15 +9,21 @@
 */
 
 //①セッションを開始する
-// session_start();
-// function getByid($id,$con){
+// if (session_status() == 'PHP_SESSION_NONE') {
+// 	session_start();
+// }
 	/* 
 	 * ②書籍を取得するSQLを作成する実行する。
 	 * その際にWHERE句でメソッドの引数の$idに一致する書籍のみ取得する。
 	 * SQLの実行結果を変数に保存す
 	 * る。
 	 */
-	//$sql = "SELECT * FROM id ORDER BY getByid";
+
+	// $sql = "SELECT * FROM books WHERE id = {$id}";
+	// $query = $con->query($sql);
+	// $extract = $query->fetch(PDO::FETCH_ASSOC);
+	// //⑫実行した結果から1レコード取得し、returnで値を返す。
+	// return $extract;
 
 	//③実行した結果から1レコード取得し、returnで値を返す。
 // 	function getByid() {
@@ -26,7 +32,9 @@
 	
 // }
 
-function updateByid($id,$con,$total){
+
+
+
 	/*
 	 * ④書籍情報の在庫数を更新するSQLを実行する。
 	 * 引数で受け取った$totalの値で在庫数を上書く。
@@ -46,7 +54,16 @@ function updateByid($id,$con,$total){
 //⑧データベースへ接続し、接続情報を変数に保存する
 
 //⑨データベースで使用する文字コードを「UTF8」にする
-
+// $db_name = 'zaiko2020_yse';
+// $host = 'localhost';
+// $user_name = 'root';
+// $passward = '';
+// $dsn = "mysql:dbname={$db_name};host={$host};charset=utf8";
+// try {
+//     $pdo = new PDO($dsn, $user_name, $passward);
+// } catch (PDOException $e) {
+//     exit;
+// }
 //⑩書籍数をカウントするための変数を宣言し、値を0で初期化する
 
 //⑪POSTの「books」から値を取得し、変数に設定する。
@@ -125,17 +142,17 @@ function updateByid($id,$con,$total){
 						//foreach(/* ㉝の処理を書く */){
 							//㉞「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に㉜の処理で取得した値と⑧のDBの接続情報を渡す。
 						?>
-						<!-- <tr>
-							<td><?php //echo	/* ㉟ ㉞で取得した書籍情報からtitleを表示する。 */;?></td>
-							<td><?php //echo	/* ㊱ ㉞で取得した書籍情報からstockを表示する。 */;?></td>
+						<tr>
+							<td><?= $book['title'];?></td>
+							<td><?= $book['stock'];?></td>
 							<td><?php //echo	/* ㊱ POSTの「stock」に設定されている値を㉜の変数を使用して呼び出す。 */;?></td>
 						</tr>
-						<input type="hidden" name="books[]" value="<?php echo /* ㊲ ㉝で取得した値を設定する */; ?>">
-						<input type="hidden" name="stock[]" value='<?php echo /* ㊳POSTの「stock」に設定されている値を㉜の変数を使用して設定する。 */;?>'>
+						<input type="hidden" name="books[]" value="<?php //echo /* ㊲ ㉝で取得した値を設定する */; ?>">
+						<input type="hidden" name="stock[]" value='<?php //echo /* ㊳POSTの「stock」に設定されている値を㉜の変数を使用して設定する。 */;?>'>
 						<?php
 							//㊴ ㉜で宣言した変数をインクリメントで値を1増やす。
-						}
-						?> -->
+						//}
+						?>
 					</tbody>
 				</table>
 				<div id="kakunin">
