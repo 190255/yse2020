@@ -34,11 +34,17 @@ $host = 'localhost';
 $user_name = 'root';
 $passward = '';
 $dsn = "mysql:dbname={$db_name};host={$host};charset=utf8";
+try {
+    $pdo = new PDO($dsn, $user_name, $passward);
+} catch (PDOException $e) {
+    exit;
+}
 //⑧POSTの「books」の値が空か判定する。空の場合はif文の中に入る。
 //if(/* ⑧の処理を行う */){
 	//⑨SESSIONの「success」に「入荷する商品が選択されていません」と設定する。
 	//⑩在庫一覧画面へ遷移する。
 //}
+
 
 function getId($id,$con){
 	/* 
@@ -48,9 +54,9 @@ function getId($id,$con){
 	 */
 	$sql = "SELECT * FROM books WHERE id = {$id}";
 	$query = $con->query($sql);
-
+	$extract = $query->fetch(PDO::FETCH_ASSOC);
 	//⑫実行した結果から1レコード取得し、returnで値を返す。
-	return $query->fetch(PDO::FETCH_ASSOC);
+	return $extract;
 }
 ?>
 <!DOCTYPE html>
@@ -102,23 +108,23 @@ function getId($id,$con){
 							<th id="in">入荷数</th>
 						</tr>
 					</thead>
-					<? if (isset($_POST['books'])); ?>
+					<?php if (isset($_POST['books'])); ?>
 					<?php 
 					/*
 					 * ⑮POSTの「books」から一つずつ値を取り出し、変数に保存する。
 					 */
-    				foreach($_POST['books'] as $value){
+    				foreach ($_POST['books'] as $book_id) {
 						// ⑯「getId」関数を呼び出し、変数に戻り値を入れる。その際引数に⑮の処理で取得した値と⑥のDBの接続情報を渡す。
-						$book = getId($value, $pdo);
+						$book = getId($book_id, $pdo);
 					?>
-					<input type="hidden" value="<?php echo $book['id'] ?>" name="books[]">
+					<input type="hidden" value="<?= $book['id'];?>" name="books[]">
 					<tr>
-						<td><?php echo $book['id'];?></td>
-						<td><?php echo $book['title'];?></td>
-						<td><?php echo $book['author'];?></td>
-						<td><?php echo $book['salesDate'];?></td>
-						<td><?php echo $book['price'];?></td>
-						<td><?php echo $book['stock'];?></td>
+						<td><?= $book['id'];?></td>
+						<td><?= $book['title'];?></td>
+						<td><?= $book['author'];?></td>
+						<td><?= $book['salesDate'];?></td>
+						<td><?= $book['price'];?></td>
+						<td><?= $book['stock'];?></td>
 						<td><input type='text' name='stock[]' size='5' maxlength='11' required></td>
 					</tr>
 					<?php
