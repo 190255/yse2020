@@ -60,6 +60,7 @@ if (!empty($_POST["name"])) {
 // //⑭SESSIONの「error2」にnullを入れる。
 // 	$error2='';
 // }
+//
 ?>
 <!DOCTYPE html>
 <html lang="ja">
