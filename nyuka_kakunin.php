@@ -80,8 +80,8 @@ foreach($_POST['books'] as $index => $book_id){
 	 * 半角数字以外の文字が設定されていないかを「is_numeric」関数を使用して確認する。
 	 * 半角数字以外の文字が入っていた場合はif文の中に入る。
 	 */
-	$stock - $_POST['stock'][$index];
-	if (!is_numeic($stuck)) {
+	$stock = $_POST['stock'][$index];
+	if (!is_numeric($stock)) {
 		//⑬SESSIONの「error」に「数値以外が入力されています」と設定する。
 		//⑭「include」を使用して「nyuka.php」を呼び出す。
 		//⑮「exit」関数で処理を終了する。
@@ -112,7 +112,7 @@ foreach($_POST['books'] as $index => $book_id){
 	//㉕POSTの「books」から値を取得し、変数に設定する。
 	foreach ($_POST['books'] as $book_id) {
 		//㉖「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に㉕の処理で取得した値と⑧のDBの接続情報を渡す。
-		$book = getId($book_id, $pdo);
+		$book = getByid($book_id, $pdo);
 		//㉗ ㉖で取得した書籍の情報の「stock」と、㉔の変数を元にPOSTの「stock」から値を取り出し、足した値を変数に保存する。
 		//㉘「updateByid」関数を呼び出す。その際に引数に㉕の処理で取得した値と⑧のDBの接続情報と㉗で計算した値を渡す。
 		//㉙ ㉔で宣言した変数をインクリメントで値を1増やす。
@@ -149,10 +149,10 @@ foreach($_POST['books'] as $index => $book_id){
 						//㉜書籍数をカウントするための変数を宣言し、値を0で初期化する。
 						$index = 0;
 						//㉝POSTの「books」から値を取得し、変数に設定する。
-						foreach ($_POST['books'] as $index-> $book_id) {
+						foreach ($_POST['books'] as $index=> $book_id) {
 						//foreach(/* ㉝の処理を書く */){
 							//㉞「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に㉜の処理で取得した値と⑧のDBの接続情報を渡す。
-							$book = getId($book_id, $pdo);
+							$book = getByid($book_id, $pdo);
 							$stock = $_POST['stock'][$index];
 						?>
 						<tr>
