@@ -11,12 +11,16 @@
 */
 
 //①セッションを開始する
+session_start();
+session_regenerate_id(true);
 
 //②SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
-// if (/* ②の処理を書く */){
-// 	//③SESSIONの「error2」に「ログインしてください」と設定する。
-// 	//④ログイン画面へ遷移する。
-// }
+if ($_SESSION['login'] == false){
+	//③SESSIONの「error2」に「ログインしてください」と設定する。
+	$_SESSION['error2'] = 'ログインしてください';
+	//④ログイン画面へ遷移する。
+	header('location:login.php');
+}
 
 //⑤データベースへ接続し、接続情報を変数に保存する
 $sql = "SELECT * FROM books";
@@ -56,9 +60,10 @@ $query = $pdo->query($sql);
 				 * ⑧SESSIONの「success」にメッセージが設定されているかを判定する。
 				 * 設定されていた場合はif文の中に入る。
 				 */ 
-				// if(/* ⑧の処理を書く */){
-				// 	//⑨SESSIONの「success」の中身を表示する。
-				// }
+				if($_SESSION['success']){
+					//⑨SESSIONの「success」の中身を表示する。
+					echo $_SESSION['success'];
+				}
 				?>
 			</div>
 			
