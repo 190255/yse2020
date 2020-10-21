@@ -10,6 +10,7 @@
 
 //①セッションを開始する
 session_start();
+session_regenerate_id(true);
 
 function getByid($id,$con){
 	/* 
@@ -61,18 +62,18 @@ try {
 //⑩書籍数をカウントするための変数を宣言し、値を0で初期化する
 $book_count = 0;
 //⑪POSTの「books」から値を取得し、変数に設定する。
-$book_count = $_POST['books'];
-foreach($book_count as $book){
+foreach($_POST['books'] as $index => $book_id){
 	/*
 	 * ⑫POSTの「stock」について⑩の変数の値を使用して値を取り出す。
 	 * 半角数字以外の文字が設定されていないかを「is_numeric」関数を使用して確認する。
 	 * 半角数字以外の文字が入っていた場合はif文の中に入る。
 	 */
-	// if (/* ⑫の処理を書く */) {
+	$stock = $_POST['stock'][$index];
+	if (is_numeric($stock)) {
 	// 	//⑬SESSIONの「error」に「数値以外が入力されています」と設定する。
 	// 	//⑭「include」を使用して「syukka.php」を呼び出す。
 	// 	//⑮「exit」関数で処理を終了する。
-	// }
+	}
 
 	//⑯「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に⑪の処理で取得した値と⑧のDBの接続情報を渡す。
 
@@ -86,7 +87,7 @@ foreach($book_count as $book){
 	// }
 	
 	//㉒ ⑩で宣言した変数をインクリメントで値を1増やす。
-	$book_count++;
+	++$book_count;
 }
 
 /*
@@ -135,20 +136,20 @@ foreach($book_count as $book){
 					//㉜書籍数をカウントするための変数を宣言し、値を0で初期化する。
 					$book_num = 0;
 					//㉝POSTの「books」から値を取得し、変数に設定する。
-					foreach($_POST['books'] as $book){
+					foreach($_POST['books'] as $index => $book_id){
 						//㉞「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に㉜の処理で取得した値と⑧のDBの接続情報を渡す。
-						$book = getByid($book, $pdo);
+						$book = getByid($book_id, $pdo);
 					?>
 					<tr>
 						<td><?php echo	$book['title'];?></td>
 						<td><?php echo	$book['stock'];?></td>
-						<td><?php echo	$_POST['stock']/* ㊲ POSTの「stock」に設定されている値を㉜の変数を使用して呼び出す。 */;?></td>
+						<td><?php echo	$_POST['stock'][$index];?></td>
 					</tr>
-					<input type="hidden" name="books[]" value="<?php echo $book;?>">
-					<input type="hidden" name="stock[]" value='<?php echo /* ㊴「POSTの「stock」に設定されている値を㉜の変数を使用して設定する。 */;?>'>
+					<input type="hidden" name="books[]" value="<?php echo $book['id'];?>">
+					<input type="hidden" name="stock[]" value='<?php echo $_POST['stock'][$index];?>'>
 					<?php
 						//㊵ ㉜で宣言した変数をインクリメントで値を1増やす。
-						$book_num++;
+						++$book_num;
 					}
 					?>
 				</tbody>
