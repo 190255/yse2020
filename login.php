@@ -55,11 +55,12 @@ if (!empty($_POST["name"])) {
 
 
 //⑫SESSIONの「error2」に値が入っているか判定する。入っていた場合はif文の中に入る
-// if (!empty($_POST[$_SESSION==$error2])) {
-// // 	//⑬SESSIONの「error2」の値をエラーメッセージを入れる変数に設定する。
-// //⑭SESSIONの「error2」にnullを入れる。
-// 	$error2='';
-// }
+if (!empty(($_SESSION['error2']))) {
+	//⑬SESSIONの「error2」の値をエラーメッセージを入れる変数に設定する。
+	$_SESSION['error2']=$errormessage;
+	//⑭SESSIONの「error2」にnullを入れる。
+ 	$_SESSION['error2']='';
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -73,9 +74,14 @@ if (!empty($_POST["name"])) {
 		<h1>ログイン</h1>
 		<?php
 		//⑮エラーメッセージの変数に入っている値を表示する
-		// echo "<div id='error'>",$errormessage, "</div>";
+		// if (isset($_POST['decision'])&&$_POST['decision']==1){
+		// 	echo "<div id='error'>",$errormessage, "</div>";
+		// }
 		//⑯メッセージの変数に入っている値を表示する
-		// echo "<div id='msg'>",$message, "</div>";
+		if (isset($_POST['decision'])&&$_POST['decision']==1){
+			echo "<div id='msg'>",$message, "</div>";
+		}
+		//echo "<div id='msg'>",$message, "</div>";
 		?>
 		<form action="login.php" method="post" id="log">
 			<p>
