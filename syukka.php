@@ -4,6 +4,7 @@
 書籍の出荷数を指定する。確定ボタンを押すことで確認画面へ出荷個数を引き継いで遷移す
 る。
 
+
 【エラー一覧（エラー表示：発生条件）】
 このフィールドを入力して下さい(吹き出し)：出荷個数が未入力
 出荷する個数が在庫数を超えています：出荷したい個数が在庫数を超えている
@@ -13,17 +14,17 @@
  * ①session_status()の結果が「PHP_SESSION_NONE」と一致するか判定する。
  * 一致した場合はif文の中に入る。
  */
-if (session_status() == 'PHP_SESSION_NONE') {
+if (session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
 
-// //③SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
-// if ($_SESSION['login']==false){
-//  	//④SESSIONの「error2」に「ログインしてください」と設定する。
-// 	$_SESSION['error2']='ログインしてください';
-//  	//⑤ログイン画面へ遷移する。
-// 	header('location:login.php');
-// }
+//③SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
+if($_SESSION['login']==false){
+	//④SESSIONの「error2」に「ログインしてください」と設定する。
+	$_SESSION['error2']='ログインしてください';
+	//⑤ログイン画面へ遷移する。
+	header('location:login.php');
+}
 
 //⑥データベースへ接続し、接続情報を変数に保存する
 
