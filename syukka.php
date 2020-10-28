@@ -25,6 +25,7 @@ if($_SESSION['login']==false){
 	//⑤ログイン画面へ遷移する。
 	header('location:login.php');
 }
+var_dump ($_SESSION['login']);
 
 //⑥データベースへ接続し、接続情報を変数に保存する
 
@@ -47,6 +48,7 @@ if(empty($_POST['books'])){
 	//⑩在庫一覧画面へ遷移する。
 	header('location:zaiko_ichiran.php');
 }
+
 
 
 function getId($id,$con){
