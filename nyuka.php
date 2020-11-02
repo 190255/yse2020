@@ -21,10 +21,13 @@ if (session_status() == 'PHP_SESSION_NONE') {
 
 
 //③SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
-//if (/* ③の処理を書く */){
+if ($_SESSION['login']==false){
 	//④SESSIONの「error2」に「ログインしてください」と設定する。
+	$_SESSION['error2']='ログインしてください';
 	//⑤ログイン画面へ遷移する。
-//}
+	header('location:login.php');
+}
+var_dump ($_SESSION['login']);
 
 //⑥データベースへ接続し、接続情報を変数に保存する
 
@@ -40,10 +43,12 @@ try {
     exit;
 }
 //⑧POSTの「books」の値が空か判定する。空の場合はif文の中に入る。
-//if(/* ⑧の処理を行う */){
+if(empty($_POST['books'])){
 	//⑨SESSIONの「success」に「入荷する商品が選択されていません」と設定する。
+	$_SESSION['success']='入荷する商品が選択されていません';
 	//⑩在庫一覧画面へ遷移する。
-//}
+	header('location:zaiko_ichiran.php');
+}
 
 
 function getId($id,$con){
@@ -70,6 +75,7 @@ function getId($id,$con){
 	<!-- ヘッダ -->
 	<div id="header">
 		<h1>入荷</h1>
+	
 	</div>
 
 	<!-- メニュー -->
@@ -90,9 +96,10 @@ function getId($id,$con){
 			 * ⑬SESSIONの「error」にメッセージが設定されているかを判定する。
 			 * 設定されていた場合はif文の中に入る。
 			 */ 
-			///if(/* ⑬の処理を書く */){
+			if(!empty($_SESSION['error'])){
 				//⑭SESSIONの「error」の中身を表示する。
-			//}
+				var_dump($_SESSION['error']);
+			}
 			?>
 			</div>
 			<div id="center">
