@@ -20,7 +20,6 @@ if (session_status() == PHP_SESSION_NONE) {
 	session_start();
 }
 
-
 //③SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
 if ($_SESSION['login']==false){
 	//④SESSIONの「error2」に「ログインしてください」と設定する。
