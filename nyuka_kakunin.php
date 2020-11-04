@@ -107,7 +107,7 @@ foreach($_POST['books'] as $index => $book_id){
  * ㉓POSTでこの画面のボタンの「add」に値が入ってるか確認する。
  * 値が入っている場合は中身に「ok」が設定されていることを確認する。
  */
-if($_POST['add'] == 'ok'){
+if(!empty($_POST['add']) == 'ok'){
 	//㉔書籍数をカウントするための変数を宣言し、値を0で初期化する。
 
 	//㉕POSTの「books」から値を取得し、変数に設定する。
@@ -160,7 +160,7 @@ if($_POST['add'] == 'ok'){
 						//foreach(/* ㉝の処理を書く */){
 							//㉞「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に㉜の処理で取得した値と⑧のDBの接続情報を渡す。
 							$book = getByid($book_id, $pdo);
-							$stock = $_POST['stock'][$index];
+							//$stock = $_POST['stock'][$index];
 						?>
 						<tr>
 							<td><?= $book['title'];?></td>
