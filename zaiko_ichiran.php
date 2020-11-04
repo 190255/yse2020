@@ -109,7 +109,6 @@ $query = $pdo->query($sql);
 							echo "<td>{$extract['salesDate']}</td>";
 							echo "<td>{$extract['price']}</td>";
 							echo "<td>{$extract['stock']}</td>";
-
 							echo "</tr>";
 						}
 						?>
