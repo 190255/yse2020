@@ -100,27 +100,33 @@ foreach($_POST['books'] as $index => $book_id){
 
 	
 	//㉒ ⑩で宣言した変数をインクリメントで値を1増やす。
+	
 }
 
 /*
  * ㉓POSTでこの画面のボタンの「add」に値が入ってるか確認する。
  * 値が入っている場合は中身に「ok」が設定されていることを確認する。
  */
-	//if(/* ㉓の処理を書く */){
+if(!empty($_POST['add']) == 'ok'){
 	//㉔書籍数をカウントするための変数を宣言し、値を0で初期化する。
 
 	//㉕POSTの「books」から値を取得し、変数に設定する。
-	foreach ($_POST['books'] as $book_id) {
+	foreach ($_POST['books'] as $index => $book_id) {
 		//㉖「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に㉕の処理で取得した値と⑧のDBの接続情報を渡す。
 		$book = getByid($book_id, $pdo);
 		//㉗ ㉖で取得した書籍の情報の「stock」と、㉔の変数を元にPOSTの「stock」から値を取り出し、足した値を変数に保存する。
+		$totalsb = $book['stock'] + $_POST['stock'][$index];
 		//㉘「updateByid」関数を呼び出す。その際に引数に㉕の処理で取得した値と⑧のDBの接続情報と㉗で計算した値を渡す。
+		$updateb_book = updateByid($book_id, $pdo, $totalsb);
 		//㉙ ㉔で宣言した変数をインクリメントで値を1増やす。
+		
 	}
 
-	//㉚SESSIONの「success」に「入荷が完了しました」と設定する。
+	//㉚SESSIONの「success」に「入荷が完了しました」と設定する
+	$_SESSION['success'] = '入荷が完了しました。';
 	//㉛「header」関数を使用して在庫一覧画面へ遷移する。
-
+	header('location: zaiko_ichiran.php');
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -154,7 +160,7 @@ foreach($_POST['books'] as $index => $book_id){
 						//foreach(/* ㉝の処理を書く */){
 							//㉞「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に㉜の処理で取得した値と⑧のDBの接続情報を渡す。
 							$book = getByid($book_id, $pdo);
-							$stock = $_POST['stock'][$index];
+							//$stock = $_POST['stock'][$index];
 						?>
 						<tr>
 							<td><?= $book['title'];?></td>

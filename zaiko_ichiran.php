@@ -60,9 +60,9 @@ $query = $pdo->query($sql);
 				 * ⑧SESSIONの「success」にメッセージが設定されているかを判定する。
 				 * 設定されていた場合はif文の中に入る。
 				 */ 
-				if($_SESSION['success']){
+				if(!empty($_SESSION['success'])){
 					//⑨SESSIONの「success」の中身を表示する。
-					echo $_SESSION['success'];
+					var_dump($_SESSION['success']);
 				}
 				?>
 			</div>
@@ -109,7 +109,6 @@ $query = $pdo->query($sql);
 							echo "<td>{$extract['salesDate']}</td>";
 							echo "<td>{$extract['price']}</td>";
 							echo "<td>{$extract['stock']}</td>";
-
 							echo "</tr>";
 						}
 						?>
