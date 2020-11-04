@@ -19,7 +19,7 @@ function getByid($id,$con){
 	 * SQLの実行結果を変数に保存する。
 	 */
 
-	$sql = "SELECT * FROM books WHERE id = $id";
+	$sql = "SELECT * FROM books WHERE id = {$id}";
 	$query = $con->query($sql);
 	$extract = $query->fetch(PDO::FETCH_ASSOC);
 	//⑫実行した結果から1レコード取得し、returnで値を返す。
@@ -32,7 +32,7 @@ function updateByid($id,$con,$total){
 	 * 引数で受け取った$totalの値で在庫数を上書く。
 	 * その際にWHERE句でメソッドの引数に$idに一致する書籍のみ取得する。
 	 */
-	$sql = "UPDATE books SET stock = $total WHERE id = $id";
+	$sql = "UPDATE books SET stock = {$total} WHERE id = {$id}";
 	$query = $con->query($sql);
 	$extract = $query->fetch(PDO::FETCH_ASSOC);
 
@@ -102,7 +102,7 @@ foreach($_POST['books'] as $index => $book_id){
  * ㉓POSTでこの画面のボタンの「add」に値が入ってるか確認する。
  * 値が入っている場合は中身に「ok」が設定されていることを確認する。
  */
-if($_POST['add'] == 'ok'){
+if(!empty($_POST['add']) == 'ok'){
 	//㉔書籍数をカウントするための変数を宣言し、値を0で初期化する。
 	// $book_count = 0;
 	//㉕POSTの「books」から値を取得し、変数に設定する。
@@ -118,7 +118,7 @@ if($_POST['add'] == 'ok'){
 	}
 
 	//㉚SESSIONの「success」に「入荷が完了しました」と設定する。
-	$_SESSION['success'] = '入荷が完了しました';
+	$_SESSION['success'] = '出荷が完了しました';
 	//㉛「header」関数を使用して在庫一覧画面へ遷移する。
 	header('location:zaiko_ichiran.php');
 }

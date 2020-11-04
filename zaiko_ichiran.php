@@ -62,7 +62,7 @@ $query = $pdo->query($sql);
 				 */ 
 				if($_SESSION['success']){
 					//⑨SESSIONの「success」の中身を表示する。
-					echo $_SESSION['success'];
+					var_dump($_SESSION['success']);
 				}
 				?>
 			</div>
