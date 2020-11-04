@@ -160,12 +160,12 @@ if(!empty($_POST['add']) == 'ok'){
 						//foreach(/* ㉝の処理を書く */){
 							//㉞「getByid」関数を呼び出し、変数に戻り値を入れる。その際引数に㉜の処理で取得した値と⑧のDBの接続情報を渡す。
 							$book = getByid($book_id, $pdo);
-							//$stock = $_POST['stock'][$index];
+							$stock = $_POST['stock'][$index];
 						?>
 						<tr>
 							<td><?= $book['title'];?></td>
 							<td><?= $book['stock'];?></td>
-							<td><?= $_POST['stock'][$index];//echo	/* ㊱ POSTの「stock」に設定されている値を㉜の変数を使用して呼び出す。 */;?></td>
+							<td><?= $stock;//echo	/* ㊱ POSTの「stock」に設定されている値を㉜の変数を使用して呼び出す。 */;?></td>
 						</tr>
 						<input type="hidden" name="books[]" value="<?= $book['id'] //echo /* ㊲ ㉝で取得した値を設定する */; ?>">
 						<input type="hidden" name="stock[]" value='<?= $stock; //echo /* ㊳POSTの「stock」に設定されている値を㉜の変数を使用して設定する。 */;?>'>
