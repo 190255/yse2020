@@ -15,6 +15,7 @@
  * 一致した場合はif文の中に入る。
  */
 if (session_status() == 'PHP_SESSION_NONE') {
+
 	//②セッションを開始する
 	session_start();
 }
@@ -27,7 +28,6 @@ if ($_SESSION['login']==false){
 	//⑤ログイン画面へ遷移する。
 	header('location:login.php');
 }
-var_dump ($_SESSION['login']);
 
 //⑥データベースへ接続し、接続情報を変数に保存する
 
@@ -120,7 +120,7 @@ function getId($id,$con){
 					/*
 					 * ⑮POSTの「books」から一つずつ値を取り出し、変数に保存する。
 					 */
-    				foreach ($_POST['books'] as $book_id) {
+    				foreach($_POST['books'] as $book_id){
 						// ⑯「getId」関数を呼び出し、変数に戻り値を入れる。その際引数に⑮の処理で取得した値と⑥のDBの接続情報を渡す。
 						$book = getId($book_id, $pdo);
 					?>
