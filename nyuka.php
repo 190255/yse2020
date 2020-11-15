@@ -15,7 +15,6 @@
  * 一致した場合はif文の中に入る。
  */
 if (session_status() == PHP_SESSION_NONE) {
-
 	//②セッションを開始する
 	session_start();
 }
@@ -97,7 +96,7 @@ function getId($id,$con){
 			 */ 
 			if(!empty($_SESSION['error'])){
 				//⑭SESSIONの「error」の中身を表示する。
-				var_dump($_SESSION['error']);
+				echo ($_SESSION['error']);
 			}
 			?>
 			</div>
