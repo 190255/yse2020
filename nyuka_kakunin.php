@@ -44,12 +44,12 @@ function updateByid($id, $con, $total)
 	// $sql = "UPDATE books SET stock = {$total} WHERE id = {$id}";
 	// $con->query($sql);
 	// }
-//⑤SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
+//②SESSIONの「login」フラグがfalseか判定する。「login」フラグがfalseの場合はif文の中に入る。
 if ($_SESSION['login'] == false){
-	//⑥SESSIONの「error2」に「ログインしてください」と設定する。
-	$_SESSION['error2'] == 'ログインしてください。';
-	//⑦ログイン画面へ遷移する。
-	header('location: login.php');
+	//③SESSIONの「error2」に「ログインしてください」と設定する。
+	$_SESSION['error2'] = 'ログインしてください';
+	//④ログイン画面へ遷移する。
+	header('location:login.php');
 }
 
 //⑧データベースへ接続し、接続情報を変数に保存する
